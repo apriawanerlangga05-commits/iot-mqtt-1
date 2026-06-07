@@ -234,7 +234,7 @@ export default function App() {
     }
 
     // 2. Parsed value of suhu
-    if (topic === 'iot/sensor/suhu') {
+    if (topic === 'iot/erlangga_161024/sensor/suhu') {
       const val = parseFloat(payloadStr);
       if (!isNaN(val)) {
         setSuhu(val);
@@ -245,7 +245,7 @@ export default function App() {
     }
 
     // 3. Parsed value of kelembapan
-    if (topic === 'iot/sensor/kelembapan') {
+    if (topic === 'iot/erlangga_161024/sensor/kelembapan') {
       const val = parseFloat(payloadStr);
       if (!isNaN(val)) {
         setKelembapan(val);
@@ -290,9 +290,9 @@ export default function App() {
         }));
         addLog('Broker 1 (Mosquitto): Terhubung!', 'incoming');
         
-        client.subscribe('iot/sensor/suhu', { qos: 0 });
-        client.subscribe('iot/sensor/kelembapan', { qos: 0 });
-        client.subscribe('iot/ping/mosquitto', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/suhu', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/kelembapan', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/ping/mosquitto', { qos: 0 });
       });
 
       client.on('close', () => {
@@ -360,9 +360,9 @@ export default function App() {
         }));
         addLog('Broker 2 (Flespi): Berhasil terhubung dengan Token!', 'incoming');
         
-        client.subscribe('iot/sensor/suhu', { qos: 0 });
-        client.subscribe('iot/sensor/kelembapan', { qos: 0 });
-        client.subscribe('iot/ping/flespi', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/suhu', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/kelembapan', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/ping/flespi', { qos: 0 });
       });
 
       client.on('close', () => {
@@ -426,9 +426,9 @@ export default function App() {
         }));
         addLog('Broker 3 (Mosquitto Auth): Berhasil menyambungkan dengan otentikasi!', 'incoming');
         
-        client.subscribe('iot/sensor/suhu', { qos: 0 });
-        client.subscribe('iot/sensor/kelembapan', { qos: 0 });
-        client.subscribe('iot/ping/mosquitto_auth', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/suhu', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/sensor/kelembapan', { qos: 0 });
+        client.subscribe('iot/erlangga_161024/ping/mosquitto_auth', { qos: 0 });
       });
 
       client.on('close', () => {
@@ -486,13 +486,13 @@ export default function App() {
       const nowStr = Date.now().toString();
       
       if (client1Ref.current && brokerStatus.mosquitto.connected) {
-        client1Ref.current.publish('iot/ping/mosquitto', nowStr, { qos: 0 });
+        client1Ref.current.publish('iot/erlangga_161024/ping/mosquitto', nowStr, { qos: 0 });
       }
       if (client2Ref.current && brokerStatus.flespi.connected) {
-        client2Ref.current.publish('iot/ping/flespi', nowStr, { qos: 0 });
+        client2Ref.current.publish('iot/erlangga_161024/ping/flespi', nowStr, { qos: 0 });
       }
       if (client3Ref.current && brokerStatus.mosquitto_auth.connected) {
-        client3Ref.current.publish('iot/ping/mosquitto_auth', nowStr, { qos: 0 });
+        client3Ref.current.publish('iot/erlangga_161024/ping/mosquitto_auth', nowStr, { qos: 0 });
       }
     }, 5000);
 
@@ -564,10 +564,10 @@ export default function App() {
   // Set all Relays
   const setAllRelays = (val: boolean) => {
     setRelayStates({ 1: val, 2: val, 3: val, 4: val });
-    publishToAllBrokers('iot/relay/1', val ? 'ON' : 'OFF');
-    publishToAllBrokers('iot/relay/2', val ? 'ON' : 'OFF');
-    publishToAllBrokers('iot/relay/3', val ? 'ON' : 'OFF');
-    publishToAllBrokers('iot/relay/4', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/1', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/2', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/3', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/4', val ? 'ON' : 'OFF');
   };
 
   // Set individual Pattern
@@ -579,8 +579,8 @@ export default function App() {
   // Set all Patterns
   const setAllPola = (val: boolean) => {
     setPolaStates({ 1: val, 2: val });
-    publishToAllBrokers('iot/pola/1', val ? 'ON' : 'OFF');
-    publishToAllBrokers('iot/pola/2', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/pola/1', val ? 'ON' : 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/pola/2', val ? 'ON' : 'OFF');
   };
 
   // Voice system action: Shutdown everything
@@ -589,12 +589,12 @@ export default function App() {
     setPolaStates({ 1: false, 2: false });
     
     // Publish OFF to all
-    publishToAllBrokers('iot/relay/1', 'OFF');
-    publishToAllBrokers('iot/relay/2', 'OFF');
-    publishToAllBrokers('iot/relay/3', 'OFF');
-    publishToAllBrokers('iot/relay/4', 'OFF');
-    publishToAllBrokers('iot/pola/1', 'OFF');
-    publishToAllBrokers('iot/pola/2', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/1', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/2', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/3', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/relay/4', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/pola/1', 'OFF');
+    publishToAllBrokers('iot/erlangga_161024/pola/2', 'OFF');
   };
 
   // Save flespi token and reconnect Flespi
