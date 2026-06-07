@@ -1,0 +1,6 @@
+{
+  "name": "Dashboard IoT Kendali Pintar",
+  "description": "Dashboard IoT interaktif bahasa Indonesia dengan tema biru cyan, kontrol sakelar lampu, visualisasi sensor real-time, asisten suara, dan input token Flespi langsung.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
