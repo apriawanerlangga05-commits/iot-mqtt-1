@@ -269,7 +269,7 @@ export default function App() {
     const clientId = `mqtt_web_mosq1_${Math.random().toString(16).slice(2, 10)}`;
     const protocol = useWss ? 'wss' : 'ws';
     const host = 'test.mosquitto.org';
-    const port = useWss ? 8081 : 8080;
+    const port = useWss ? 1884 : 1883;
     const path = '/mqtt';
     const brokerUrl = `${protocol}://${host}:${port}${path}`;
 
@@ -403,7 +403,7 @@ export default function App() {
     const protocol = useWss ? 'wss' : 'ws';
     const host = 'test.mosquitto.org';
     // Mosquitto Auth uses ws/wss on port 8091 (standard ws or tls)
-    const port = 8091;
+    const port = 1884;
     const path = '/mqtt';
     const brokerUrl = `${protocol}://${host}:${port}${path}`;
 
